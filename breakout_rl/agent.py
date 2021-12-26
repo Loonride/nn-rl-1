@@ -25,7 +25,7 @@ class Agent:
         self.curr_step = 0
         self.save_index = 0
 
-        self.save_every = 3000000
+        self.save_every = 1000000
         
         self.max_memory = 100000
         self.memory = deque(maxlen=self.max_memory)
@@ -168,7 +168,7 @@ class Agent:
         )
         # self.save_index += 1
         print(f"Net saved to {save_path} at step {self.curr_step}")
-        exit()
+        # exit()
 
     def load(self, d=None, save_index=None):
         d = self.save_dir
