@@ -25,7 +25,7 @@ class Agent:
         self.curr_step = 0
         self.save_index = 0
 
-        self.save_every = 500000
+        self.save_every = 5000000
         
         self.max_memory = 100000
         self.memory = deque(maxlen=self.max_memory)
@@ -166,10 +166,12 @@ class Agent:
             dict(memory=list(self.memory)),
             mem_save_path,
         )
-        self.save_index += 1
+        # self.save_index += 1
         print(f"Net saved to {save_path} at step {self.curr_step}")
 
-    def load(self, d, save_index):
+    def load(self, d=None, save_index=None):
+        d = self.save_dir
+        save_index = self.save_index
         save_path = d / f"net_{save_index}.p"
         mem_save_path = d / f"mem_{save_index}.p"
         saved_data = torch.load(save_path)
