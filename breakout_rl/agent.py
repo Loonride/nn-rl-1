@@ -25,7 +25,7 @@ class Agent:
         self.curr_step = 0
         self.save_index = 0
 
-        self.save_every = 5000000
+        self.save_every = 3000000
         
         self.max_memory = 100000
         self.memory = deque(maxlen=self.max_memory)
