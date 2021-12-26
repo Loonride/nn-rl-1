@@ -168,6 +168,7 @@ class Agent:
         )
         # self.save_index += 1
         print(f"Net saved to {save_path} at step {self.curr_step}")
+        exit()
 
     def load(self, d=None, save_index=None):
         d = self.save_dir
