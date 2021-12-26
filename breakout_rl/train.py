@@ -26,7 +26,7 @@ save_dir = Path("/local/knagaitsev/breakout_rl") # / datetime.datetime.now().str
 # save_dir.mkdir(parents=True)
 
 agent = Agent(state_dim=(4, 84, 84), action_dim=env.action_space.n, save_dir=save_dir)
-# agent.load()
+agent.load()
 
 logger = MetricLogger(save_dir)
 
