@@ -27,7 +27,8 @@ class Agent:
 
         self.save_every = 500000
         
-        self.memory = deque(maxlen=100000)
+        self.max_memory = 100000
+        self.memory = deque(maxlen=self.max_memory)
         self.batch_size = 32
 
         self.gamma = 0.99
@@ -158,7 +159,7 @@ class Agent:
         save_path = self.save_dir / f"net_{self.save_index}.p"
         mem_save_path = self.save_dir / f"mem_{self.save_index}.p"
         torch.save(
-            dict(model=self.net.state_dict(), optim=self.optimizer.state_dict(), exploration_rate=self.exploration_rate),
+            dict(model=self.net.state_dict(), optim=self.optimizer.state_dict(), exploration_rate=self.exploration_rate, curr_step=self.curr_step),
             save_path,
         )
         torch.save(
@@ -167,3 +168,15 @@ class Agent:
         )
         self.save_index += 1
         print(f"Net saved to {save_path} at step {self.curr_step}")
+
+    def load(self, d, save_index):
+        save_path = d / f"net_{save_index}.p"
+        mem_save_path = d / f"mem_{save_index}.p"
+        saved_data = torch.load(save_path)
+        mem_data = torch.load(mem_save_path)
+        self.net.load_state_dict(saved_data['model'])
+        self.optimizer.load_state_dict(saved_data['optim'])
+        self.exploration_rate = saved_data['exploration_rate']
+        self.curr_step = saved_data['curr_step']
+
+        self.memory = deque(mem_data['memory'], maxlen=self.max_memory)
