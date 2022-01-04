@@ -8,7 +8,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=2
 #SBATCH --job-name=breakout_rl_train
-#SBATCH --mem-per-cpu=60000
+#SBATCH --mem-per-cpu=40000
 #SBATCH --time=4:00:00
 
 . /opt/conda/etc/profile.d/conda.sh
